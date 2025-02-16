@@ -237,7 +237,7 @@ footer {
     width: 100px;
     height: 100px;
     z-index: -1;
-    background-image: url('../img/Half\ circle.gif');
+    background-image: url('../img/loader.gif');
     background-repeat: no-repeat;
     background-position: center;
 }
