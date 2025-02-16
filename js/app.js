@@ -217,6 +217,13 @@ document.addEventListener("DOMContentLoaded", () => {
     const selectedButton = document.querySelector(".selected");
 
     if (
+      event.target.tagName === "DIV" &&
+      event.target.parentElement.tagName === "FOOTER"
+    ) {
+      document.location.reload();
+    }
+
+    if (
       event.target.tagName === "BUTTON" &&
       event.target.parentElement.tagName === "NAV"
     ) {
