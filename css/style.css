@@ -238,7 +238,6 @@ footer {
     height: 100px;
     z-index: -1;
     background-image: url('../img/loader.gif');
-    background: url('/js15/img/loader.gif');
     background-repeat: no-repeat;
     background-position: center;
 }
