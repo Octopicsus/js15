@@ -81,8 +81,8 @@ p:hover {
 .load-btn::before {
     content: '';
     display: block;
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     background-image: url('../img/right-arrow-next.svg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -90,9 +90,20 @@ p:hover {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%) rotate(90deg);
+    transform: translate(-50%, -50%) rotate(90deg) scale(1);
     opacity: 50%;
 }
+
+.load-btn:hover::before {
+    opacity: 100%;
+}
+
+.load-btn:hover{
+   transform: scale(1.5);
+   animation: none;
+}
+
+
 
 @keyframes pulse {
     0% {
