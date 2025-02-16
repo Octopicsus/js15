@@ -166,11 +166,25 @@ function generateOverlay() {
 //   };
 // }
 
+function showLoader() {
+  const loader = document.createElement("div");
+  loader.classList.add("loader");
+  loader.classList.add("disable");
+  root.appendChild(loader);
+}
+
 function createResponseApi(type) {
   let itemUrl = `https://swapi.dev/api/${type}`;
 
   return async function () {
     const loadBtn = document.querySelector(".load-btn");
+    const loader = document.querySelector(".loader");
+    const list = document.querySelector(".items-list");
+
+    loader.classList.remove("disable");
+    if (list.children.length > 0) {
+      loader.classList.add("move");
+    }
     loadBtn.classList.remove("show");
 
     const response = await fetch(itemUrl);
@@ -182,11 +196,15 @@ function createResponseApi(type) {
     } else {
       loadBtn.classList.remove("show");
     }
+
     showItems(data.results, type);
     window.scrollTo({
       top: document.body.scrollHeight,
       behavior: "smooth",
     });
+
+    loader.classList.add("disable");
+    loader.classList.remove("move");
   };
 }
 
@@ -206,6 +224,8 @@ function showFooter() {
 
 document.addEventListener("DOMContentLoaded", () => {
   let currentResponseApi;
+
+  showLoader();
 
   showNavigation();
   showBg();

@@ -13,7 +13,7 @@
 }
 
 body {
-
+    background-color: rgb(255, 255, 255);
     padding: 0;
     margin: 0;
 }
@@ -47,7 +47,7 @@ button {
 
 p {
     font-size: 15px;
-    margin: 20px;
+    margin: 30px;
     height: 20px;
     transition: .3s;
     cursor: pointer;
@@ -68,7 +68,7 @@ p:hover {
 }
 
 .load-btn {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0);
     color: transparent;
     display: none;
     margin-left: auto;
@@ -76,6 +76,7 @@ p:hover {
     margin-top: 30px;
     margin-bottom: 60px;
     position: relative;
+    animation: pulse 1.5s infinite;
 }
 
 .load-btn::before {
@@ -92,6 +93,20 @@ p:hover {
     left: 50%;
     transform: translate(-50%, -50%) rotate(90deg);
     opacity: 50%;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.2;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+
+    100% {
+        opacity: 0.2;
+    }
 }
 
 .show {
@@ -146,20 +161,20 @@ h5 {
     margin: 0;
     margin-bottom: 0;
     margin-left: 0;
-     margin-right: 10px;
-     font-size: 15px;
-     width: 100%;
-     color: rgb(112, 112, 112);
+    margin-right: 10px;
+    font-size: 15px;
+    width: 100%;
+    color: rgb(112, 112, 112);
 }
 
 h4 {
-   margin: 0;
-   font-size: 20px;
-   text-align: right;
-  
+    margin: 0;
+    font-size: 20px;
+    text-align: right;
+
 }
 
-h2{
+h2 {
     margin: 0;
     font-family: 'Orbitron-B';
     font-size: 34px;
@@ -192,7 +207,7 @@ footer {
     position: fixed;
     width: 100%;
     height: 100%;
-    background-image: url('../img/star-wars.svg');
+    background-image: url('../img/sw.svg');
     background-position: 50% 40%;
     background-size: 360px;
     background-repeat: no-repeat;
@@ -202,4 +217,21 @@ footer {
 
 .disable {
     display: none;
+}
+
+.loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    z-index: -1;
+    background-image: url('/img/Half\ circle.gif');
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.move {
+    margin-left: 200px;
 }
