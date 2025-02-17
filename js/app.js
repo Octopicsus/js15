@@ -250,6 +250,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (selectedButton) {
         selectedButton.classList.remove("selected");
       }
+
       event.target.classList.add("selected");
       currentResponseApi = createResponseApi(event.target.id);
       clearContent();
