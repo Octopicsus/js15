@@ -93,21 +93,25 @@ async function showPopup(item, type) {
   const blur = document.querySelector(".blur");
   const popup = document.querySelector(".popup");
 
-  overlay.classList.add("active");
-  blur.classList.add("active");
-  popup.classList.add("active");
+  try {
+    overlay.classList.add("active");
+    blur.classList.add("active");
+    popup.classList.add("active");
 
-  popup.innerHTML = `<h2>${item.name}</h2>`;
+    popup.innerHTML = `<h2>${item.name}</h2>`;
 
-  const response = await fetch(item.url);
-  const data = await response.json();
-  console.log(data);
-  const details = getDetails(data, type);
+    const response = await fetch(item.url);
+    const data = await response.json();
+    console.log(data);
+    const details = getDetails(data, type);
 
-  details.forEach(({ label, value }) => {
-    const detailElement = createDetailElement(label, value);
-    popup.appendChild(detailElement);
-  });
+    details.forEach(({ label, value }) => {
+      const detailElement = createDetailElement(label, value);
+      popup.appendChild(detailElement);
+    });
+  } catch (error) {
+    console.log(`Popup Error: ${error}`);
+  }
 }
 
 function generateOverlay() {
@@ -131,14 +135,6 @@ function generateOverlay() {
   });
 }
 
-//     fetch(itemUrl)
-//       .then((response) => response.json())
-//       .then((data) => {
-//         itemUrl = data.next;
-//       });
-//   };
-// }
-
 function showLoader() {
   const loader = document.createElement("div");
   loader.classList.add("loader");
@@ -153,6 +149,14 @@ function moveBottom() {
   };
 }
 
+//     fetch(itemUrl)
+//       .then((response) => response.json())
+//       .then((data) => {
+//         itemUrl = data.next;
+//       });
+//   };
+// }
+
 function createResponseApi(type) {
   let itemUrl = `https://swapi.dev/api/${type}`;
 
@@ -161,27 +165,31 @@ function createResponseApi(type) {
     const loader = document.querySelector(".loader");
     const list = document.querySelector(".items-list");
 
-    loader.classList.remove("disable");
-    if (list.children.length > 0) {
-      loader.classList.add("move");
-    }
-    loadBtn.classList.remove("show");
-
-    const response = await fetch(itemUrl);
-    const data = await response.json();
-    itemUrl = data.next;
-
-    if (data.next) {
-      loadBtn.classList.add("show");
-    } else {
+    try {
+      loader.classList.remove("disable");
+      if (list.children.length > 0) {
+        loader.classList.add("move");
+      }
       loadBtn.classList.remove("show");
+
+      const response = await fetch(itemUrl);
+      const data = await response.json();
+      itemUrl = data.next;
+
+      if (data.next) {
+        loadBtn.classList.add("show");
+      } else {
+        loadBtn.classList.remove("show");
+      }
+
+      showItems(data.results, type);
+      window.scrollTo(moveBottom());
+
+      loader.classList.add("disable");
+      loader.classList.remove("move");
+    } catch (error) {
+      console.log(`Error List: ${error}`);
     }
-
-    showItems(data.results, type);
-    window.scrollTo(moveBottom());
-
-    loader.classList.add("disable");
-    loader.classList.remove("move");
   };
 }
 
