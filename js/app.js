@@ -96,19 +96,20 @@ async function showPopup(item, type) {
   try {
     overlay.classList.add("active");
     blur.classList.add("active");
-    popup.classList.add("active");
-
-    popup.innerHTML = `<h2>${item.name}</h2>`;
 
     const response = await fetch(item.url);
     const data = await response.json();
     console.log(data);
     const details = getDetails(data, type);
 
+    popup.classList.add("active");
+
+    popup.innerHTML = `<h2>${item.name}</h2>`;
     details.forEach(({ label, value }) => {
       const detailElement = createDetailElement(label, value);
       popup.appendChild(detailElement);
     });
+    popup.querySelector(".loading").remove();
   } catch (error) {
     console.log(`Popup Error: ${error}`);
   }
